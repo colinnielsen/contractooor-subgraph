@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: AgreementArbitrator
@@ -18,12 +18,11 @@ dataSources:
         - AgreementProposed
       abis:
         - name: AgreementArbitrator
-          file: ./abis/AgreementArbitrator.json
+          file: AgreementArbitrator/abis/AgreementArbitrator.json
       eventHandlers:
         - event: AgreementInitiated(indexed bytes32,address,uint256)
           handler: handleAgreementInitiated
-        - event:
-            AgreementProposed(indexed bytes32,uint256,indexed address,indexed
+        - event: AgreementProposed(indexed bytes32,uint256,indexed address,indexed
             address,string,uint32,address,uint256,(uint16,uint16,bool,bool,bool,bool,bool))
           handler: handleAgreementProposed
-      file: ./src/agreement-arbitrator.ts
+      file: AgreementArbitrator/AgreementArbitrator.wasm
