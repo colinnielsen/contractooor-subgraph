@@ -1,0 +1,31 @@
+type AgreementInitiated @entity(immutable: true) {
+  id: Bytes!
+  agreementGUID: Bytes! # bytes32
+  contractooorAgreement: Bytes! # address
+  streamId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AgreementProposed @entity(immutable: true) {
+  id: Bytes!
+  agreementGUID: Bytes! # bytes32
+  agreementId: BigInt! # uint256
+  provider: Bytes! # address
+  client: Bytes! # address
+  contractURI: String! # string
+  targetEndTimestamp: BigInt! # uint32
+  streamToken: Bytes! # address
+  totalStreamedTokens: BigInt! # uint256
+  terminationClauses_atWillDays: Int! # uint16
+  terminationClauses_cureTimeDays: Int! # uint16
+  terminationClauses_legalCompulsion: Boolean! # bool
+  terminationClauses_moralTurpitude: Boolean! # bool
+  terminationClauses_bankruptcyDissolutionInsolvency: Boolean! # bool
+  terminationClauses_counterpartyMalfeasance: Boolean! # bool
+  terminationClauses_lostControlOfPrivateKeys: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

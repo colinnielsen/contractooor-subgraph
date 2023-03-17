@@ -1,0 +1,27 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: AgreementArbitrator
+    network: goerli
+    source:
+      address: "0x9b5c78d4e5ae9700ec402ae5e4c557ffbcb09367"
+      abi: AgreementArbitrator
+      startBlock: 8598108
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AgreementInitiated
+        - AgreementProposed
+      abis:
+        - name: AgreementArbitrator
+          file: ./abis/AgreementArbitrator.json
+      eventHandlers:
+        - event: AgreementInitiated(indexed bytes32,address,uint256)
+          handler: handleAgreementInitiated
+        - event: AgreementProposed(indexed bytes32,uint256,indexed address,indexed address,string,uint32,address,uint256,(uint16,uint16,bool,bool,bool,bool,bool))
+          handler: handleAgreementProposed
+      file: ./src/agreement-arbitrator.ts

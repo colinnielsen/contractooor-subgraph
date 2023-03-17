@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "AgreementArbitrator": {
+      "address": "0x9b5c78d4e5ae9700ec402ae5e4c557ffbcb09367",
+      "startBlock": 8598108
+    }
+  }
+}
