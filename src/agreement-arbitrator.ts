@@ -20,14 +20,16 @@ export function getOrCreateAgreementEntity(
   provider: Address,
   client: Address
 ): Agreement {
-  let id = Bytes.fromByteArray(crypto.keccak256(
-    ByteArray.fromUTF8(
-      agreementId
-        .toHex()
-        .concat(provider.toHex())
-        .concat(client.toHex())
+  let id = Bytes.fromByteArray(
+    crypto.keccak256(
+      ByteArray.fromUTF8(
+        agreementId
+          .toHex()
+          .concat(provider.toHex())
+          .concat(client.toHex())
+      )
     )
-  ));
+  );
 
   let agreement = Agreement.load(id);
 
@@ -36,14 +38,13 @@ export function getOrCreateAgreementEntity(
     agreement.agreementId = agreementId;
     agreement.provider = provider;
     agreement.client = client;
-    agreement.save();
   }
 
   return agreement;
 }
 
 export function handleAgreementProposed(event: AgreementProposedEvent): void {
-  let entity = new AgreementProposed(
+  let agreementProposedEvent = new AgreementProposed(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   );
 
@@ -53,44 +54,45 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
     event.params.client
   );
 
-  entity.agreement = agreement.id;
-  entity.agreementGUID = event.params.agreementGUID;
-  entity.agreementId = event.params.agreementId;
-  entity.proposer = event.params.proposer;
-  entity.provider = event.params.provider;
-  entity.client = event.params.client;
-  entity.contractURI = event.params.contractURI;
-  entity.targetEndTimestamp = event.params.targetEndTimestamp;
-  entity.streamToken = event.params.streamToken;
-  entity.totalStreamedTokens = event.params.totalStreamedTokens;
+  agreementProposedEvent.agreement = agreement.id;
+  agreementProposedEvent.agreementGUID = event.params.agreementGUID;
+  agreementProposedEvent.agreementId = event.params.agreementId;
+  agreementProposedEvent.proposer = event.params.proposer;
+  agreementProposedEvent.provider = event.params.provider;
+  agreementProposedEvent.client = event.params.client;
+  agreementProposedEvent.contractURI = event.params.contractURI;
+  agreementProposedEvent.targetEndTimestamp = event.params.targetEndTimestamp;
+  agreementProposedEvent.streamToken = event.params.streamToken;
+  agreementProposedEvent.totalStreamedTokens = event.params.totalStreamedTokens;
 
-  entity.terminationClauses_atWillDays =
+  agreementProposedEvent.terminationClauses_atWillDays =
     event.params.terminationClauses.atWillDays;
-  entity.terminationClauses_cureTimeDays =
+  agreementProposedEvent.terminationClauses_cureTimeDays =
     event.params.terminationClauses.cureTimeDays;
-  entity.terminationClauses_legalCompulsion =
+  agreementProposedEvent.terminationClauses_legalCompulsion =
     event.params.terminationClauses.legalCompulsion;
-  entity.terminationClauses_moralTurpitude =
+  agreementProposedEvent.terminationClauses_moralTurpitude =
     event.params.terminationClauses.moralTurpitude;
-  entity.terminationClauses_bankruptcyDissolutionInsolvency =
+  agreementProposedEvent.terminationClauses_bankruptcyDissolutionInsolvency =
     event.params.terminationClauses.bankruptcyDissolutionInsolvency;
-  entity.terminationClauses_counterpartyMalfeasance =
+  agreementProposedEvent.terminationClauses_counterpartyMalfeasance =
     event.params.terminationClauses.counterpartyMalfeasance;
-  entity.terminationClauses_lostControlOfPrivateKeys =
+  agreementProposedEvent.terminationClauses_lostControlOfPrivateKeys =
     event.params.terminationClauses.lostControlOfPrivateKeys;
 
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
+  agreementProposedEvent.blockNumber = event.block.number;
+  agreementProposedEvent.blockTimestamp = event.block.timestamp;
+  agreementProposedEvent.transactionHash = event.transaction.hash;
 
-  agreement.allProposals.push(entity.id);
-  agreement.lastProposer = event.params.proposer;
+  agreement.status = "PROPOSED";
   agreement.agreementGUID = event.params.agreementGUID;
   agreement.agreementId = event.params.agreementId;
-  agreement.currentProposal = entity.id;
-  agreement.status = "PROPOSED";
+  agreement.provider = event.params.provider;
+  agreement.client = event.params.client;
+  agreement.currentProposal = agreementProposedEvent.id;
+  agreement.lastProposer = event.params.proposer;
 
-  entity.save();
+  agreementProposedEvent.save();
   agreement.save();
 }
 
@@ -106,6 +108,8 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   );
 
   agreementInitiatedEvent.agreement = agreement.id;
+  agreementInitiatedEvent.provider = event.params.provider;
+  agreementInitiatedEvent.client = event.params.client;
   agreementInitiatedEvent.contractooorAgreement =
     event.params.contractooorAgreement;
   agreementInitiatedEvent.streamId = event.params.streamId;
@@ -114,7 +118,7 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   agreementInitiatedEvent.blockTimestamp = event.block.timestamp;
   agreementInitiatedEvent.transactionHash = event.transaction.hash;
 
-  agreement.status = "INITIATED";
+  agreement.status = "ACCEPTED";
   agreement.agreementAddress = event.params.contractooorAgreement;
 
   agreementInitiatedEvent.save();

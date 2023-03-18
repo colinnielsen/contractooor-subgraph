@@ -5,6 +5,7 @@
     "codegen": "graph codegen",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ colinnielsen/contractooor-subgraph",
+    "deploy:hosted": "graph deploy --product hosted-service colinnielsen/contractooor",
     "create-local": "graph create --node http://localhost:8020/ colinnielsen/contractooor-subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ colinnielsen/contractooor-subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 colinnielsen/contractooor-subgraph",
@@ -14,5 +15,7 @@
     "@graphprotocol/graph-cli": "0.42.4",
     "@graphprotocol/graph-ts": "0.29.1"
   },
-  "devDependencies": { "matchstick-as": "0.5.0" }
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
 }
