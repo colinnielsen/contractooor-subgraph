@@ -1,6 +1,8 @@
 type AgreementInitiated @entity(immutable: true) {
   id: Bytes!
-  agreementGUID: Bytes! # bytes32
+  agreement: Agreement!
+  provider: Bytes! # address
+  client: Bytes! # address
   contractooorAgreement: Bytes! # address
   streamId: BigInt! # uint256
   blockNumber: BigInt!
@@ -13,6 +15,7 @@ type AgreementProposed @entity(immutable: true) {
   agreement: Agreement!
   agreementGUID: Bytes! # bytes32
   agreementId: BigInt! # uint256
+  proposer: Bytes! # address
   provider: Bytes! # address
   client: Bytes! # address
   contractURI: String! # string
@@ -47,4 +50,5 @@ type Agreement @entity {
   currentProposal: AgreementProposed!
   allProposals: [AgreementProposed!]! @derivedFrom(field: "agreement")
   lastProposer: Bytes! # address
+  agreementAddress: Bytes # address
 }

@@ -39,10 +39,22 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
         "indexed": true,
-        "internalType": "bytes32",
-        "name": "agreementGUID",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
       },
       {
         "indexed": false,
@@ -74,6 +86,12 @@
         "internalType": "uint256",
         "name": "agreementId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
       },
       {
         "indexed": true,

@@ -1,7 +1,11 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "_sablier", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_sablier",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "_agreementSingleton",
@@ -11,18 +15,46 @@
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
-  { "inputs": [], "name": "INCOMPATIBLE_TOKEN", "type": "error" },
-  { "inputs": [], "name": "INVALID_TERM_LENGTH", "type": "error" },
-  { "inputs": [], "name": "NOT_CLIENT", "type": "error" },
-  { "inputs": [], "name": "NOT_SENDER_OR_CLIENT", "type": "error" },
+  {
+    "inputs": [],
+    "name": "INCOMPATIBLE_TOKEN",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "INVALID_TERM_LENGTH",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_CLIENT",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_SENDER_OR_CLIENT",
+    "type": "error"
+  },
   {
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
         "indexed": true,
-        "internalType": "bytes32",
-        "name": "agreementGUID",
-        "type": "bytes32"
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
       },
       {
         "indexed": false,
@@ -54,6 +86,12 @@
         "internalType": "uint256",
         "name": "agreementId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
       },
       {
         "indexed": true,
@@ -93,14 +131,26 @@
       },
       {
         "components": [
-          { "internalType": "uint16", "name": "atWillDays", "type": "uint16" },
+          {
+            "internalType": "uint16",
+            "name": "atWillDays",
+            "type": "uint16"
+          },
           {
             "internalType": "uint16",
             "name": "cureTimeDays",
             "type": "uint16"
           },
-          { "internalType": "bool", "name": "legalCompulsion", "type": "bool" },
-          { "internalType": "bool", "name": "moralTurpitude", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "legalCompulsion",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "moralTurpitude",
+            "type": "bool"
+          },
           {
             "internalType": "bool",
             "name": "bankruptcyDissolutionInsolvency",
@@ -128,12 +178,36 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "agreementId", "type": "uint256" },
-      { "internalType": "address", "name": "provider", "type": "address" },
-      { "internalType": "address", "name": "client", "type": "address" },
-      { "internalType": "string", "name": "contractURI", "type": "string" },
-      { "internalType": "uint32", "name": "termLength", "type": "uint32" },
-      { "internalType": "address", "name": "streamToken", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "agreementId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "contractURI",
+        "type": "string"
+      },
+      {
+        "internalType": "uint32",
+        "name": "termLength",
+        "type": "uint32"
+      },
+      {
+        "internalType": "address",
+        "name": "streamToken",
+        "type": "address"
+      },
       {
         "internalType": "uint256",
         "name": "totalStreamedTokens",
@@ -141,14 +215,26 @@
       },
       {
         "components": [
-          { "internalType": "uint16", "name": "atWillDays", "type": "uint16" },
+          {
+            "internalType": "uint16",
+            "name": "atWillDays",
+            "type": "uint16"
+          },
           {
             "internalType": "uint16",
             "name": "cureTimeDays",
             "type": "uint16"
           },
-          { "internalType": "bool", "name": "legalCompulsion", "type": "bool" },
-          { "internalType": "bool", "name": "moralTurpitude", "type": "bool" },
+          {
+            "internalType": "bool",
+            "name": "legalCompulsion",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "moralTurpitude",
+            "type": "bool"
+          },
           {
             "internalType": "bool",
             "name": "bankruptcyDissolutionInsolvency",
@@ -179,7 +265,11 @@
     "inputs": [],
     "name": "sablier",
     "outputs": [
-      { "internalType": "contract ISablier", "name": "", "type": "address" }
+      {
+        "internalType": "contract ISablier",
+        "name": "",
+        "type": "address"
+      }
     ],
     "stateMutability": "view",
     "type": "function"

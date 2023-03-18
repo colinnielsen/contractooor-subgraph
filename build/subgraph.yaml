@@ -20,9 +20,9 @@ dataSources:
         - name: AgreementArbitrator
           file: AgreementArbitrator/abis/AgreementArbitrator.json
       eventHandlers:
-        - event: AgreementInitiated(indexed bytes32,address,uint256)
+        - event: AgreementInitiated(uint256,indexed address,indexed address,address,uint256)
           handler: handleAgreementInitiated
-        - event: AgreementProposed(indexed bytes32,uint256,indexed address,indexed
+        - event: AgreementProposed(indexed bytes32,uint256,address,indexed address,indexed
             address,string,uint32,address,uint256,(uint16,uint16,bool,bool,bool,bool,bool))
           handler: handleAgreementProposed
       file: AgreementArbitrator/AgreementArbitrator.wasm

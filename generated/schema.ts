@@ -44,13 +44,31 @@ export class AgreementInitiated extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get agreementGUID(): Bytes {
-    let value = this.get("agreementGUID");
+  get agreement(): Bytes {
+    let value = this.get("agreement");
     return value!.toBytes();
   }
 
-  set agreementGUID(value: Bytes) {
-    this.set("agreementGUID", Value.fromBytes(value));
+  set agreement(value: Bytes) {
+    this.set("agreement", Value.fromBytes(value));
+  }
+
+  get provider(): Bytes {
+    let value = this.get("provider");
+    return value!.toBytes();
+  }
+
+  set provider(value: Bytes) {
+    this.set("provider", Value.fromBytes(value));
+  }
+
+  get client(): Bytes {
+    let value = this.get("client");
+    return value!.toBytes();
+  }
+
+  set client(value: Bytes) {
+    this.set("client", Value.fromBytes(value));
   }
 
   get contractooorAgreement(): Bytes {
@@ -157,6 +175,15 @@ export class AgreementProposed extends Entity {
 
   set agreementId(value: BigInt) {
     this.set("agreementId", Value.fromBigInt(value));
+  }
+
+  get proposer(): Bytes {
+    let value = this.get("proposer");
+    return value!.toBytes();
+  }
+
+  set proposer(value: Bytes) {
+    this.set("proposer", Value.fromBytes(value));
   }
 
   get provider(): Bytes {
@@ -416,5 +443,22 @@ export class Agreement extends Entity {
 
   set lastProposer(value: Bytes) {
     this.set("lastProposer", Value.fromBytes(value));
+  }
+
+  get agreementAddress(): Bytes | null {
+    let value = this.get("agreementAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set agreementAddress(value: Bytes | null) {
+    if (!value) {
+      this.unset("agreementAddress");
+    } else {
+      this.set("agreementAddress", Value.fromBytes(<Bytes>value));
+    }
   }
 }

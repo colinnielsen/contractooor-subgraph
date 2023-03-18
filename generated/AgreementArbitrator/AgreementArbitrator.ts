@@ -23,16 +23,24 @@ export class AgreementInitiated__Params {
     this._event = event;
   }
 
-  get agreementGUID(): Bytes {
-    return this._event.parameters[0].value.toBytes();
+  get agreementId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
-  get contractooorAgreement(): Address {
+  get provider(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
+  get client(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get contractooorAgreement(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
   get streamId(): BigInt {
-    return this._event.parameters[2].value.toBigInt();
+    return this._event.parameters[4].value.toBigInt();
   }
 }
 
@@ -57,33 +65,37 @@ export class AgreementProposed__Params {
     return this._event.parameters[1].value.toBigInt();
   }
 
-  get provider(): Address {
+  get proposer(): Address {
     return this._event.parameters[2].value.toAddress();
   }
 
-  get client(): Address {
+  get provider(): Address {
     return this._event.parameters[3].value.toAddress();
   }
 
+  get client(): Address {
+    return this._event.parameters[4].value.toAddress();
+  }
+
   get contractURI(): string {
-    return this._event.parameters[4].value.toString();
+    return this._event.parameters[5].value.toString();
   }
 
   get targetEndTimestamp(): BigInt {
-    return this._event.parameters[5].value.toBigInt();
+    return this._event.parameters[6].value.toBigInt();
   }
 
   get streamToken(): Address {
-    return this._event.parameters[6].value.toAddress();
+    return this._event.parameters[7].value.toAddress();
   }
 
   get totalStreamedTokens(): BigInt {
-    return this._event.parameters[7].value.toBigInt();
+    return this._event.parameters[8].value.toBigInt();
   }
 
   get terminationClauses(): AgreementProposedTerminationClausesStruct {
     return changetype<AgreementProposedTerminationClausesStruct>(
-      this._event.parameters[8].value.toTuple()
+      this._event.parameters[9].value.toTuple()
     );
   }
 }
