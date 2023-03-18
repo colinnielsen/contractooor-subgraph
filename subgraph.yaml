@@ -6,7 +6,7 @@ dataSources:
     name: AgreementArbitrator
     network: goerli
     source:
-      address: "0x9b5c78d4e5ae9700ec402ae5e4c557ffbcb09367"
+      address: "0x7b8082cd09714f0dded5d209d32066c61c189e83"
       abi: AgreementArbitrator
       startBlock: 8598108
     mapping:
