@@ -461,4 +461,21 @@ export class Agreement extends Entity {
       this.set("agreementAddress", Value.fromBytes(<Bytes>value));
     }
   }
+
+  get streamId(): BigInt | null {
+    let value = this.get("streamId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set streamId(value: BigInt | null) {
+    if (!value) {
+      this.unset("streamId");
+    } else {
+      this.set("streamId", Value.fromBigInt(<BigInt>value));
+    }
+  }
 }

@@ -51,4 +51,5 @@ type Agreement @entity {
   allProposals: [AgreementProposed!]! @derivedFrom(field: "agreement")
   lastProposer: Bytes! # address
   agreementAddress: Bytes # address
+  streamId: BigInt
 }

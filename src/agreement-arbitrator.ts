@@ -120,6 +120,7 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
 
   agreement.status = "ACCEPTED";
   agreement.agreementAddress = event.params.contractooorAgreement;
+  agreement.streamId = event.params.streamId;
 
   agreementInitiatedEvent.save();
   agreement.save();
