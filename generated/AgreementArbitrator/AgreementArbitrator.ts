@@ -23,7 +23,7 @@ export class AgreementInitiated__Params {
     this._event = event;
   }
 
-  get agreementId(): BigInt {
+  get agreementNonce(): BigInt {
     return this._event.parameters[0].value.toBigInt();
   }
 
@@ -57,11 +57,11 @@ export class AgreementProposed__Params {
     this._event = event;
   }
 
-  get agreementGUID(): Bytes {
+  get agreementHash(): Bytes {
     return this._event.parameters[0].value.toBytes();
   }
 
-  get agreementId(): BigInt {
+  get agreementNonce(): BigInt {
     return this._event.parameters[1].value.toBigInt();
   }
 
@@ -130,9 +130,102 @@ export class AgreementProposedTerminationClausesStruct extends ethereum.Tuple {
   }
 }
 
+export class AgreementArbitrator__getAgreementHashInputTerminationClausesStruct extends ethereum.Tuple {
+  get atWillDays(): i32 {
+    return this[0].toI32();
+  }
+
+  get cureTimeDays(): i32 {
+    return this[1].toI32();
+  }
+
+  get legalCompulsion(): boolean {
+    return this[2].toBoolean();
+  }
+
+  get moralTurpitude(): boolean {
+    return this[3].toBoolean();
+  }
+
+  get bankruptcyDissolutionInsolvency(): boolean {
+    return this[4].toBoolean();
+  }
+
+  get counterpartyMalfeasance(): boolean {
+    return this[5].toBoolean();
+  }
+
+  get lostControlOfPrivateKeys(): boolean {
+    return this[6].toBoolean();
+  }
+}
+
 export class AgreementArbitrator extends ethereum.SmartContract {
   static bind(address: Address): AgreementArbitrator {
     return new AgreementArbitrator("AgreementArbitrator", address);
+  }
+
+  getAgreementHash(
+    signingParty: Address,
+    agreementNonce: BigInt,
+    provider: Address,
+    client: Address,
+    contractURI: string,
+    termLength: BigInt,
+    streamToken: Address,
+    totalStreamedTokens: BigInt,
+    terminationClauses: AgreementArbitrator__getAgreementHashInputTerminationClausesStruct
+  ): Bytes {
+    let result = super.call(
+      "getAgreementHash",
+      "getAgreementHash(address,uint256,address,address,string,uint32,address,uint256,(uint16,uint16,bool,bool,bool,bool,bool)):(bytes32)",
+      [
+        ethereum.Value.fromAddress(signingParty),
+        ethereum.Value.fromUnsignedBigInt(agreementNonce),
+        ethereum.Value.fromAddress(provider),
+        ethereum.Value.fromAddress(client),
+        ethereum.Value.fromString(contractURI),
+        ethereum.Value.fromUnsignedBigInt(termLength),
+        ethereum.Value.fromAddress(streamToken),
+        ethereum.Value.fromUnsignedBigInt(totalStreamedTokens),
+        ethereum.Value.fromTuple(terminationClauses)
+      ]
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_getAgreementHash(
+    signingParty: Address,
+    agreementNonce: BigInt,
+    provider: Address,
+    client: Address,
+    contractURI: string,
+    termLength: BigInt,
+    streamToken: Address,
+    totalStreamedTokens: BigInt,
+    terminationClauses: AgreementArbitrator__getAgreementHashInputTerminationClausesStruct
+  ): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "getAgreementHash",
+      "getAgreementHash(address,uint256,address,address,string,uint32,address,uint256,(uint16,uint16,bool,bool,bool,bool,bool)):(bytes32)",
+      [
+        ethereum.Value.fromAddress(signingParty),
+        ethereum.Value.fromUnsignedBigInt(agreementNonce),
+        ethereum.Value.fromAddress(provider),
+        ethereum.Value.fromAddress(client),
+        ethereum.Value.fromString(contractURI),
+        ethereum.Value.fromUnsignedBigInt(termLength),
+        ethereum.Value.fromAddress(streamToken),
+        ethereum.Value.fromUnsignedBigInt(totalStreamedTokens),
+        ethereum.Value.fromTuple(terminationClauses)
+      ]
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   sablier(): Address {
@@ -202,7 +295,7 @@ export class AgreeToCall__Inputs {
     this._call = call;
   }
 
-  get agreementId(): BigInt {
+  get agreementNonce(): BigInt {
     return this._call.inputValues[0].value.toBigInt();
   }
 

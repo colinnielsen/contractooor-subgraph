@@ -16,14 +16,14 @@ import {
 } from "../generated/schema";
 
 export function getOrCreateAgreementEntity(
-  agreementId: BigInt,
+  agreementNonce: BigInt,
   provider: Address,
   client: Address
 ): Agreement {
   let id = Bytes.fromByteArray(
     crypto.keccak256(
       ByteArray.fromUTF8(
-        agreementId
+        agreementNonce
           .toHex()
           .concat(provider.toHex())
           .concat(client.toHex())
@@ -35,7 +35,7 @@ export function getOrCreateAgreementEntity(
 
   if (agreement == null) {
     agreement = new Agreement(id);
-    agreement.agreementId = agreementId;
+    agreement.agreementNonce = agreementNonce;
     agreement.provider = provider;
     agreement.client = client;
   }
@@ -49,14 +49,14 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
   );
 
   let agreement = getOrCreateAgreementEntity(
-    event.params.agreementId,
+    event.params.agreementNonce,
     event.params.provider,
     event.params.client
   );
 
   agreementProposedEvent.agreement = agreement.id;
-  agreementProposedEvent.agreementGUID = event.params.agreementGUID;
-  agreementProposedEvent.agreementId = event.params.agreementId;
+  agreementProposedEvent.agreementHash = event.params.agreementHash;
+  agreementProposedEvent.agreementNonce = event.params.agreementNonce;
   agreementProposedEvent.proposer = event.params.proposer;
   agreementProposedEvent.provider = event.params.provider;
   agreementProposedEvent.client = event.params.client;
@@ -85,8 +85,8 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
   agreementProposedEvent.transactionHash = event.transaction.hash;
 
   agreement.status = "PROPOSED";
-  agreement.agreementGUID = event.params.agreementGUID;
-  agreement.agreementId = event.params.agreementId;
+  agreement.agreementHash = event.params.agreementHash;
+  agreement.agreementNonce = event.params.agreementNonce;
   agreement.provider = event.params.provider;
   agreement.client = event.params.client;
   agreement.currentProposal = agreementProposedEvent.id;
@@ -102,7 +102,7 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   );
 
   let agreement = getOrCreateAgreementEntity(
-    event.params.agreementId,
+    event.params.agreementNonce,
     event.params.provider,
     event.params.client
   );

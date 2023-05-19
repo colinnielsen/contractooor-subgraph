@@ -13,8 +13,8 @@ type AgreementInitiated @entity(immutable: true) {
 type AgreementProposed @entity(immutable: true) {
   id: Bytes!
   agreement: Agreement!
-  agreementGUID: Bytes! # bytes32
-  agreementId: BigInt! # uint256
+  agreementHash: Bytes! # bytes32
+  agreementNonce: BigInt! # uint256
   proposer: Bytes! # address
   provider: Bytes! # address
   client: Bytes! # address
@@ -43,8 +43,8 @@ enum AgreementStatus {
 type Agreement @entity {
   id: Bytes! # keccak256(provider, client, agreementId)
   status: AgreementStatus!
-  agreementGUID: Bytes! # bytes32
-  agreementId: BigInt! # uint256
+  agreementHash: Bytes! # bytes32
+  agreementNonce: BigInt! # uint256
   provider: Bytes! # address
   client: Bytes! # address
   currentProposal: AgreementProposed!
