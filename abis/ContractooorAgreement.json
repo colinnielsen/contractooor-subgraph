@@ -1,0 +1,505 @@
+[
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "CURE_TIME_NOT_MET",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "INCOMPATIBLE_TOKEN",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "INVALID_END_TIME",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_AUTHORIZED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_CLIENT",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_CLIENT_OR_SERVICE_PROVIDER",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_RECEIVER",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NOT_SERVICE_PROVIDER",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NO_BREACH_NOTICE_ISSUED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "RAGE_TERMINATION_NOT_ALLOWED",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "STREAM_CANCELLATION_FAILED",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "terminator",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum TerminationReason",
+        "name": "reason",
+        "type": "uint8"
+      }
+    ],
+    "name": "AgreementTerminated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "terminator",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "terminationInfo",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum TerminationReason",
+        "name": "reason",
+        "type": "uint8"
+      }
+    ],
+    "name": "RageTermination",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "information",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum TerminationReason",
+        "name": "initialTerminationReason",
+        "type": "uint8"
+      }
+    ],
+    "name": "TerminationProposalDeleted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "proposer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "terminationInfo",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "enum TerminationReason",
+        "name": "reason",
+        "type": "uint8"
+      }
+    ],
+    "name": "TerminationProposed",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "agreement",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "internalType": "uint16",
+        "name": "atWillDays",
+        "type": "uint16"
+      },
+      {
+        "internalType": "uint16",
+        "name": "cureTimeDays",
+        "type": "uint16"
+      },
+      {
+        "internalType": "bool",
+        "name": "legalCompulsion",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "moralTurpitude",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "bankruptcyDissolutionInsolvency",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "counterpartyMalfeasance",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "lostControlOfPrivateKeys",
+        "type": "bool"
+      },
+      {
+        "internalType": "string",
+        "name": "contractURI",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "atWillTerminationTimestamp",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "streamToken",
+        "type": "address"
+      }
+    ],
+    "name": "emergencyRecoverTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISablier",
+        "name": "_sablier",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "streamToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokensToStream",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "termLength",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "provider",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "client",
+            "type": "address"
+          },
+          {
+            "internalType": "uint16",
+            "name": "atWillDays",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "cureTimeDays",
+            "type": "uint16"
+          },
+          {
+            "internalType": "bool",
+            "name": "legalCompulsion",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "moralTurpitude",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "bankruptcyDissolutionInsolvency",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "counterpartyMalfeasance",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "lostControlOfPrivateKeys",
+            "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "contractURI",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct Agreement",
+        "name": "_agreement",
+        "type": "tuple"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "_streamId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "cureInfo",
+        "type": "string"
+      }
+    ],
+    "name": "issueNoticeOfCure",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "breachInfo",
+        "type": "string"
+      }
+    ],
+    "name": "issueNoticeOfMaterialBreach",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "terminationInfo",
+        "type": "string"
+      }
+    ],
+    "name": "issueNoticeOfTermination",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "materialBreachTimestamp",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "mutualConsentTerminationId",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum TerminationReason",
+        "name": "reason",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "terminationInfo",
+        "type": "string"
+      }
+    ],
+    "name": "rageTerminate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "streamId",
+    "outputs": [
+      {
+        "internalType": "uint96",
+        "name": "",
+        "type": "uint96"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "terminateAtWill",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "terminateByMaterialBreach",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "terminationInfo",
+        "type": "string"
+      }
+    ],
+    "name": "terminateByMutualConsent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "timesContractBreached",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "withdrawalReason",
+        "type": "string"
+      }
+    ],
+    "name": "withdrawNoticeOfMaterialBreach",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

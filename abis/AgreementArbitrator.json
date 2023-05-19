@@ -41,7 +41,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "agreementId",
+        "name": "agreementNonce",
         "type": "uint256"
       },
       {
@@ -78,13 +78,13 @@
       {
         "indexed": true,
         "internalType": "bytes32",
-        "name": "agreementGUID",
+        "name": "agreementHash",
         "type": "bytes32"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "agreementId",
+        "name": "agreementNonce",
         "type": "uint256"
       },
       {
@@ -180,7 +180,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "agreementId",
+        "name": "agreementNonce",
         "type": "uint256"
       },
       {
@@ -259,6 +259,102 @@
     "name": "agreeTo",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "signingParty",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "agreementNonce",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "provider",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "client",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "contractURI",
+        "type": "string"
+      },
+      {
+        "internalType": "uint32",
+        "name": "termLength",
+        "type": "uint32"
+      },
+      {
+        "internalType": "address",
+        "name": "streamToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalStreamedTokens",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "atWillDays",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint16",
+            "name": "cureTimeDays",
+            "type": "uint16"
+          },
+          {
+            "internalType": "bool",
+            "name": "legalCompulsion",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "moralTurpitude",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "bankruptcyDissolutionInsolvency",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "counterpartyMalfeasance",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "lostControlOfPrivateKeys",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct TerminationClauses",
+        "name": "terminationClauses",
+        "type": "tuple"
+      }
+    ],
+    "name": "getAgreementHash",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "pure",
     "type": "function"
   },
   {
