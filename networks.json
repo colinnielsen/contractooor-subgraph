@@ -1,11 +1,11 @@
 {
   "goerli": {
     "AgreementArbitrator": {
-      "address": "0x7b8082cd09714f0dded5d209d32066c61c189e83",
-      "startBlock": 8673073
+      "address": "0x9fb29042ed4a468808b052af2013c0d1a5d798c5",
+      "startBlock": 9050464
     },
-    "Contract": {
-      "address": "0x547edbaf8468913fc8023d7d6bcd86d881d683e6"
+    "ContractooorAgreement": {
+      "address": "0xb0f944accd5489b86fd85a3265f9b8da3a0da378"
     }
   }
 }
