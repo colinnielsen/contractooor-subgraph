@@ -29,6 +29,12 @@ export class AgreementInitiated extends Entity {
     }
   }
 
+  static loadInBlock(id: Bytes): AgreementInitiated | null {
+    return changetype<AgreementInitiated | null>(
+      store.get_in_block("AgreementInitiated", id.toHexString())
+    );
+  }
+
   static load(id: Bytes): AgreementInitiated | null {
     return changetype<AgreementInitiated | null>(
       store.get("AgreementInitiated", id.toHexString())
@@ -37,7 +43,11 @@ export class AgreementInitiated extends Entity {
 
   get id(): Bytes {
     let value = this.get("id");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set id(value: Bytes) {
@@ -46,7 +56,11 @@ export class AgreementInitiated extends Entity {
 
   get agreement(): Bytes {
     let value = this.get("agreement");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set agreement(value: Bytes) {
@@ -55,7 +69,11 @@ export class AgreementInitiated extends Entity {
 
   get provider(): Bytes {
     let value = this.get("provider");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set provider(value: Bytes) {
@@ -64,7 +82,11 @@ export class AgreementInitiated extends Entity {
 
   get client(): Bytes {
     let value = this.get("client");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set client(value: Bytes) {
@@ -73,7 +95,11 @@ export class AgreementInitiated extends Entity {
 
   get contractooorAgreement(): Bytes {
     let value = this.get("contractooorAgreement");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set contractooorAgreement(value: Bytes) {
@@ -82,7 +108,11 @@ export class AgreementInitiated extends Entity {
 
   get streamId(): BigInt {
     let value = this.get("streamId");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set streamId(value: BigInt) {
@@ -91,7 +121,11 @@ export class AgreementInitiated extends Entity {
 
   get blockNumber(): BigInt {
     let value = this.get("blockNumber");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set blockNumber(value: BigInt) {
@@ -100,7 +134,11 @@ export class AgreementInitiated extends Entity {
 
   get blockTimestamp(): BigInt {
     let value = this.get("blockTimestamp");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set blockTimestamp(value: BigInt) {
@@ -109,7 +147,11 @@ export class AgreementInitiated extends Entity {
 
   get transactionHash(): Bytes {
     let value = this.get("transactionHash");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set transactionHash(value: Bytes) {
@@ -135,6 +177,12 @@ export class AgreementProposed extends Entity {
     }
   }
 
+  static loadInBlock(id: Bytes): AgreementProposed | null {
+    return changetype<AgreementProposed | null>(
+      store.get_in_block("AgreementProposed", id.toHexString())
+    );
+  }
+
   static load(id: Bytes): AgreementProposed | null {
     return changetype<AgreementProposed | null>(
       store.get("AgreementProposed", id.toHexString())
@@ -143,7 +191,11 @@ export class AgreementProposed extends Entity {
 
   get id(): Bytes {
     let value = this.get("id");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set id(value: Bytes) {
@@ -152,7 +204,11 @@ export class AgreementProposed extends Entity {
 
   get agreement(): Bytes {
     let value = this.get("agreement");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set agreement(value: Bytes) {
@@ -161,7 +217,11 @@ export class AgreementProposed extends Entity {
 
   get agreementHash(): Bytes {
     let value = this.get("agreementHash");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set agreementHash(value: Bytes) {
@@ -170,7 +230,11 @@ export class AgreementProposed extends Entity {
 
   get agreementNonce(): BigInt {
     let value = this.get("agreementNonce");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set agreementNonce(value: BigInt) {
@@ -179,7 +243,11 @@ export class AgreementProposed extends Entity {
 
   get proposer(): Bytes {
     let value = this.get("proposer");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set proposer(value: Bytes) {
@@ -188,7 +256,11 @@ export class AgreementProposed extends Entity {
 
   get provider(): Bytes {
     let value = this.get("provider");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set provider(value: Bytes) {
@@ -197,7 +269,11 @@ export class AgreementProposed extends Entity {
 
   get client(): Bytes {
     let value = this.get("client");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set client(value: Bytes) {
@@ -206,7 +282,11 @@ export class AgreementProposed extends Entity {
 
   get contractURI(): string {
     let value = this.get("contractURI");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
   }
 
   set contractURI(value: string) {
@@ -215,7 +295,11 @@ export class AgreementProposed extends Entity {
 
   get targetEndTimestamp(): BigInt {
     let value = this.get("targetEndTimestamp");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set targetEndTimestamp(value: BigInt) {
@@ -224,7 +308,11 @@ export class AgreementProposed extends Entity {
 
   get streamToken(): Bytes {
     let value = this.get("streamToken");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set streamToken(value: Bytes) {
@@ -233,7 +321,11 @@ export class AgreementProposed extends Entity {
 
   get totalStreamedTokens(): BigInt {
     let value = this.get("totalStreamedTokens");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set totalStreamedTokens(value: BigInt) {
@@ -242,7 +334,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_atWillDays(): i32 {
     let value = this.get("terminationClauses_atWillDays");
-    return value!.toI32();
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
   }
 
   set terminationClauses_atWillDays(value: i32) {
@@ -251,7 +347,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_cureTimeDays(): i32 {
     let value = this.get("terminationClauses_cureTimeDays");
-    return value!.toI32();
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
   }
 
   set terminationClauses_cureTimeDays(value: i32) {
@@ -260,7 +360,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_legalCompulsion(): boolean {
     let value = this.get("terminationClauses_legalCompulsion");
-    return value!.toBoolean();
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
   }
 
   set terminationClauses_legalCompulsion(value: boolean) {
@@ -269,7 +373,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_moralTurpitude(): boolean {
     let value = this.get("terminationClauses_moralTurpitude");
-    return value!.toBoolean();
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
   }
 
   set terminationClauses_moralTurpitude(value: boolean) {
@@ -278,7 +386,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_bankruptcyDissolutionInsolvency(): boolean {
     let value = this.get("terminationClauses_bankruptcyDissolutionInsolvency");
-    return value!.toBoolean();
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
   }
 
   set terminationClauses_bankruptcyDissolutionInsolvency(value: boolean) {
@@ -290,7 +402,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_counterpartyMalfeasance(): boolean {
     let value = this.get("terminationClauses_counterpartyMalfeasance");
-    return value!.toBoolean();
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
   }
 
   set terminationClauses_counterpartyMalfeasance(value: boolean) {
@@ -302,7 +418,11 @@ export class AgreementProposed extends Entity {
 
   get terminationClauses_lostControlOfPrivateKeys(): boolean {
     let value = this.get("terminationClauses_lostControlOfPrivateKeys");
-    return value!.toBoolean();
+    if (!value || value.kind == ValueKind.NULL) {
+      return false;
+    } else {
+      return value.toBoolean();
+    }
   }
 
   set terminationClauses_lostControlOfPrivateKeys(value: boolean) {
@@ -314,7 +434,11 @@ export class AgreementProposed extends Entity {
 
   get blockNumber(): BigInt {
     let value = this.get("blockNumber");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set blockNumber(value: BigInt) {
@@ -323,7 +447,11 @@ export class AgreementProposed extends Entity {
 
   get blockTimestamp(): BigInt {
     let value = this.get("blockTimestamp");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set blockTimestamp(value: BigInt) {
@@ -332,7 +460,11 @@ export class AgreementProposed extends Entity {
 
   get transactionHash(): Bytes {
     let value = this.get("transactionHash");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set transactionHash(value: Bytes) {
@@ -358,6 +490,12 @@ export class Agreement extends Entity {
     }
   }
 
+  static loadInBlock(id: Bytes): Agreement | null {
+    return changetype<Agreement | null>(
+      store.get_in_block("Agreement", id.toHexString())
+    );
+  }
+
   static load(id: Bytes): Agreement | null {
     return changetype<Agreement | null>(
       store.get("Agreement", id.toHexString())
@@ -366,7 +504,11 @@ export class Agreement extends Entity {
 
   get id(): Bytes {
     let value = this.get("id");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set id(value: Bytes) {
@@ -375,7 +517,11 @@ export class Agreement extends Entity {
 
   get status(): string {
     let value = this.get("status");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
   }
 
   set status(value: string) {
@@ -384,7 +530,11 @@ export class Agreement extends Entity {
 
   get agreementHash(): Bytes {
     let value = this.get("agreementHash");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set agreementHash(value: Bytes) {
@@ -393,7 +543,11 @@ export class Agreement extends Entity {
 
   get agreementNonce(): BigInt {
     let value = this.get("agreementNonce");
-    return value!.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set agreementNonce(value: BigInt) {
@@ -402,7 +556,11 @@ export class Agreement extends Entity {
 
   get provider(): Bytes {
     let value = this.get("provider");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set provider(value: Bytes) {
@@ -411,16 +569,37 @@ export class Agreement extends Entity {
 
   get client(): Bytes {
     let value = this.get("client");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set client(value: Bytes) {
     this.set("client", Value.fromBytes(value));
   }
 
+  get contractURI(): string {
+    let value = this.get("contractURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set contractURI(value: string) {
+    this.set("contractURI", Value.fromString(value));
+  }
+
   get currentProposal(): Bytes {
     let value = this.get("currentProposal");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set currentProposal(value: Bytes) {
@@ -429,16 +608,20 @@ export class Agreement extends Entity {
 
   get allProposals(): Array<Bytes> {
     let value = this.get("allProposals");
-    return value!.toBytesArray();
-  }
-
-  set allProposals(value: Array<Bytes>) {
-    this.set("allProposals", Value.fromBytesArray(value));
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytesArray();
+    }
   }
 
   get lastProposer(): Bytes {
     let value = this.get("lastProposer");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
   }
 
   set lastProposer(value: Bytes) {

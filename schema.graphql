@@ -47,6 +47,7 @@ type Agreement @entity {
   agreementNonce: BigInt! # uint256
   provider: Bytes! # address
   client: Bytes! # address
+  contractURI: String! # string
   currentProposal: AgreementProposed!
   allProposals: [AgreementProposed!]! @derivedFrom(field: "agreement")
   lastProposer: Bytes! # address

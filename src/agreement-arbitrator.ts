@@ -89,6 +89,7 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
   agreement.agreementNonce = event.params.agreementNonce;
   agreement.provider = event.params.provider;
   agreement.client = event.params.client;
+  agreement.contractURI = event.params.contractURI;
   agreement.currentProposal = agreementProposedEvent.id;
   agreement.lastProposer = event.params.proposer;
 
