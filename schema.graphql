@@ -40,6 +40,11 @@ enum AgreementStatus {
   TERMINATED
 }
 
+type UserPair @entity {
+  id: Bytes! # keccak256(ASC sorted address a + b, agreementNonce)
+  nonce: Int!
+}
+
 type Agreement @entity {
   id: Bytes! # keccak256(provider, client, agreementId)
   status: AgreementStatus!

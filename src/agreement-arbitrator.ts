@@ -4,6 +4,7 @@ import {
   ByteArray,
   Bytes,
   crypto,
+  log,
 } from "@graphprotocol/graph-ts";
 import {
   AgreementInitiated as AgreementInitiatedEvent,
@@ -13,21 +14,38 @@ import {
   Agreement,
   AgreementInitiated,
   AgreementProposed,
+  UserPair,
 } from "../generated/schema";
 
-export function getOrCreateAgreementEntity(
-  agreementNonce: BigInt,
+export function getOrCreateUserPairEntity(
   provider: Address,
   client: Address
+): UserPair {
+  const hashConcat = provider.concat(client);
+  log.info("hashConcat: {}", [hashConcat.toHexString()]);
+
+  let id = Bytes.fromByteArray(crypto.keccak256(hashConcat));
+
+  let userPair = UserPair.load(id);
+
+  if (userPair == null) {
+    userPair = new UserPair(id);
+    userPair.nonce = 0;
+  }
+
+  return userPair;
+}
+
+export function getOrCreateAgreementEntity(
+  provider: Address,
+  client: Address,
+  agreementNonce: BigInt
 ): Agreement {
   let id = Bytes.fromByteArray(
     crypto.keccak256(
-      ByteArray.fromUTF8(
-        agreementNonce
-          .toHex()
-          .concat(provider.toHex())
-          .concat(client.toHex())
-      )
+      Bytes.fromBigInt(agreementNonce)
+        .concat(provider)
+        .concat(client)
     )
   );
 
@@ -49,9 +67,9 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
   );
 
   let agreement = getOrCreateAgreementEntity(
-    event.params.agreementNonce,
     event.params.provider,
-    event.params.client
+    event.params.client,
+    event.params.agreementNonce
   );
 
   agreementProposedEvent.agreement = agreement.id;
@@ -103,7 +121,12 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   );
 
   let agreement = getOrCreateAgreementEntity(
-    event.params.agreementNonce,
+    event.params.provider,
+    event.params.client,
+    event.params.agreementNonce
+  );
+
+  let userPair = getOrCreateUserPairEntity(
     event.params.provider,
     event.params.client
   );
@@ -123,6 +146,9 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   agreement.agreementAddress = event.params.contractooorAgreement;
   agreement.streamId = event.params.streamId;
 
+  userPair.nonce = userPair.nonce + 1;
+
   agreementInitiatedEvent.save();
   agreement.save();
+  userPair.save();
 }

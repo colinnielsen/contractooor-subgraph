@@ -472,6 +472,61 @@ export class AgreementProposed extends Entity {
   }
 }
 
+export class UserPair extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save UserPair entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type UserPair must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("UserPair", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static loadInBlock(id: Bytes): UserPair | null {
+    return changetype<UserPair | null>(
+      store.get_in_block("UserPair", id.toHexString())
+    );
+  }
+
+  static load(id: Bytes): UserPair | null {
+    return changetype<UserPair | null>(store.get("UserPair", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get nonce(): i32 {
+    let value = this.get("nonce");
+    if (!value || value.kind == ValueKind.NULL) {
+      return 0;
+    } else {
+      return value.toI32();
+    }
+  }
+
+  set nonce(value: i32) {
+    this.set("nonce", Value.fromI32(value));
+  }
+}
+
 export class Agreement extends Entity {
   constructor(id: Bytes) {
     super();
