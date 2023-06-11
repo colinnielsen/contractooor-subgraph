@@ -42,7 +42,7 @@ enum AgreementStatus {
 
 type UserPair @entity {
   id: Bytes! # keccak256(ASC sorted address a + b, agreementNonce)
-  nonce: Int!
+  agreementCount: Int!
 }
 
 type Agreement @entity {

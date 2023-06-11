@@ -513,8 +513,8 @@ export class UserPair extends Entity {
     this.set("id", Value.fromBytes(value));
   }
 
-  get nonce(): i32 {
-    let value = this.get("nonce");
+  get agreementCount(): i32 {
+    let value = this.get("agreementCount");
     if (!value || value.kind == ValueKind.NULL) {
       return 0;
     } else {
@@ -522,8 +522,8 @@ export class UserPair extends Entity {
     }
   }
 
-  set nonce(value: i32) {
-    this.set("nonce", Value.fromI32(value));
+  set agreementCount(value: i32) {
+    this.set("agreementCount", Value.fromI32(value));
   }
 }
 

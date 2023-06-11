@@ -1,11 +1,4 @@
-import {
-  Address,
-  BigInt,
-  ByteArray,
-  Bytes,
-  crypto,
-  log,
-} from "@graphprotocol/graph-ts";
+import { Address, BigInt, Bytes, crypto, log } from "@graphprotocol/graph-ts";
 import {
   AgreementInitiated as AgreementInitiatedEvent,
   AgreementProposed as AgreementProposedEvent,
@@ -22,15 +15,18 @@ export function getOrCreateUserPairEntity(
   client: Address
 ): UserPair {
   const hashConcat = provider.concat(client);
-  log.info("hashConcat: {}", [hashConcat.toHexString()]);
 
   let id = Bytes.fromByteArray(crypto.keccak256(hashConcat));
 
   let userPair = UserPair.load(id);
+  log.info("found: {}", [!!userPair ? "true" : "false"]);
+  log.info("provider: {}", [provider.toHex()]);
+  log.info("client: {}", [client.toHex()]);
+  log.info("id: {}", [id.toHex()]);
 
   if (userPair == null) {
     userPair = new UserPair(id);
-    userPair.nonce = 0;
+    userPair.agreementCount = 0;
   }
 
   return userPair;
@@ -50,12 +46,15 @@ export function getOrCreateAgreementEntity(
   );
 
   let agreement = Agreement.load(id);
+  if (agreement) log.info("agreement: {}", [agreement.id.toHex()]);
+  else log.info("agreement: {}", ["null"]);
 
   if (agreement == null) {
     agreement = new Agreement(id);
-    agreement.agreementNonce = agreementNonce;
-    agreement.provider = provider;
-    agreement.client = client;
+    let userPair = getOrCreateUserPairEntity(provider, client);
+    log.info("nonce: {}", [agreementNonce.toString()]);
+    userPair.agreementCount = userPair.agreementCount + 1;
+    userPair.save();
   }
 
   return agreement;
@@ -102,6 +101,9 @@ export function handleAgreementProposed(event: AgreementProposedEvent): void {
   agreementProposedEvent.blockTimestamp = event.block.timestamp;
   agreementProposedEvent.transactionHash = event.transaction.hash;
 
+  agreement.provider = event.params.provider;
+  agreement.client = event.params.client;
+  agreement.agreementNonce = event.params.agreementNonce;
   agreement.status = "PROPOSED";
   agreement.agreementHash = event.params.agreementHash;
   agreement.agreementNonce = event.params.agreementNonce;
@@ -126,11 +128,6 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
     event.params.agreementNonce
   );
 
-  let userPair = getOrCreateUserPairEntity(
-    event.params.provider,
-    event.params.client
-  );
-
   agreementInitiatedEvent.agreement = agreement.id;
   agreementInitiatedEvent.provider = event.params.provider;
   agreementInitiatedEvent.client = event.params.client;
@@ -146,9 +143,6 @@ export function handleAgreementInitiated(event: AgreementInitiatedEvent): void {
   agreement.agreementAddress = event.params.contractooorAgreement;
   agreement.streamId = event.params.streamId;
 
-  userPair.nonce = userPair.nonce + 1;
-
   agreementInitiatedEvent.save();
   agreement.save();
-  userPair.save();
 }
