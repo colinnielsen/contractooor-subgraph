@@ -6,9 +6,9 @@ dataSources:
     name: AgreementArbitrator
     network: goerli
     source:
-      address: "0x9fb29042ed4a468808b052af2013c0d1a5d798c5"
+      address: "0x4e465e7fbf9cfa860b08c3c1e72b5bd7b4b10b40"
       abi: AgreementArbitrator
-      startBlock: 9050464
+      startBlock: 9181050
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

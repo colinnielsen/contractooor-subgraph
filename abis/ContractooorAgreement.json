@@ -478,7 +478,7 @@
   },
   {
     "inputs": [],
-    "name": "timesContractBreached",
+    "name": "timesContractCured",
     "outputs": [
       {
         "internalType": "uint256",
